@@ -52,7 +52,66 @@ docker build -t mcp/alpaca .
 }
 ```
 
-#### Development Setup
+#### Installing via UV (Fast Python Package Installer)
+
+UV is a modern Python package installer that can simplify the installation process. To use UV with alpaca-mcp:
+
+1. First, [install UV](https://github.com/astral-sh/uv) if you don't have it already:
+
+```sh
+# Using pip
+pip install uv
+
+# Using brew on macOS
+brew install uv
+```
+
+2. Configure your Claude Desktop config file to use UV:
+
+```json
+{
+  "mcpServers": {
+    "alpaca": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/alpaca-mcp",
+        "run",
+        "alpaca-mcp"
+      ],
+      "env": {
+        "ALPACA_API_KEY": "REPLACE_API_KEY",
+        "ALPACA_API_SECRET": "REPLACE_API_SECRET"
+      }
+    }
+  }
+}
+```
+
+3. Install the package with UV:
+
+```sh
+# Clone the repository
+git clone https://github.com/berlinbra/alpaca-mcp.git
+cd alpaca-mcp
+
+# Install dependencies using UV
+uv pip install -e .
+```
+
+4. Run the server using UV:
+
+```sh
+uv run alpaca_mcp/server.py
+```
+
+5. For debugging purposes, you can use the MCP inspector:
+
+```sh
+npx @modelcontextprotocol/inspector uv --directory /path/to/alpaca-mcp run src/alpaca_mcp/server.py
+```
+
+#### Standard Development Setup
 
 ```bash
 # Clone the repository
@@ -138,6 +197,7 @@ Error messages are returned in a clear, human-readable format.
 - httpx
 - mcp
 - alpaca-py
+- python-dotenv (for loading environment variables)
 
 ## License
 This MCP server is licensed under the MIT License.
