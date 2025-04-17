@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alpaca-mcp"
+version = "0.1.0"
+authors = [
+    {name = "berlinbra", email = "berlinbra@users.noreply.github.com"},
+]
+description = "MCP Server for Alpaca Crypto API"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.23.0",
+    "mcp>=0.2.0",
+    "alpaca-py>=0.8.2",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+alpaca-mcp = "alpaca_mcp.server:main"
+
+[tool.setuptools]
+packages = ["alpaca_mcp"]
+package-dir = {"" = "src"}
